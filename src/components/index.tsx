@@ -158,7 +158,7 @@ const LandingPage: React.FC = () => {
         animate={{ opacity: 1, y: 0 }}
         exit={{ opacity: 0, y: 100 }}
         transition={{ duration: 0.5, ease: "easeInOut" }}
-        className="md:w-screen h-full items-center md:p-36 p-16 space-y-2 md:space-y-4"
+        className="md:w-full h-full items-center md:p-36 p-16 space-y-2 md:space-y-4"
         >
         <h1 className="text-4xl font-bold">Projetos</h1>
         <motion.ul
@@ -171,14 +171,14 @@ const LandingPage: React.FC = () => {
         <motion.li key={project.id} className="item" variants={item}> 
           {project.link ? (
               <Link href={project.link} target="_blank" className="flex items-end text-center w-52 h-72 rounded-lg hover:scale-105 duration-500 transition ease-in-out font-sora" style={{backgroundImage: `url("${project.image}")`, backgroundSize: 'cover', backgroundPosition: 'center'}}>
-                <div className={`${isDarkMode ? 'bg-[#1E1E1E] text-gray-200' : 'bg-gray-200 text-[#1E1E1E]'} text-gray-200 shadow-lg rounded-lg w-full p-2`}> 
+                <div className={`${isDarkMode ? 'bg-[#1E1E1E] text-gray-200' : 'bg-gray-200 text-[#1E1E1E]'}  shadow-lg rounded-lg w-full p-2`}> 
                   <h2 className="text-base font-normal">{project.title}</h2>
                   <p className="text-xs font-light">{project.description}</p>
                 </div>
               </Link>
             ) : (
               <div className="flex items-end text-center w-52 h-72 rounded-lg hover:scale-105 duration-500 transition ease-in-out font-sora" style={{backgroundImage: `url("${project.image}")`, backgroundSize: 'cover', backgroundPosition: 'center'}}>
-                <div className={`${isDarkMode ? 'bg-[#1E1E1E] text-gray-200' : 'bg-gray-200 text-[#1E1E1E]'} text-gray-200 shadow-lg rounded-lg w-full p-2`}> 
+                <div className={`${isDarkMode ? 'bg-[#1E1E1E] ' : 'bg-gray-200 text-[#1E1E1E]'} shadow-lg rounded-lg w-full p-2`}> 
                   <h2 className="text-base font-normal">{project.title}</h2>
                   <p className="text-xs font-light">{project.description}</p>
                 </div>
@@ -197,7 +197,7 @@ const LandingPage: React.FC = () => {
             {projectsTwo.map((project) => (
         <motion.li key={project.id} className="item" variants={item}> 
           <Link href="/" className="flex items-end text-center w-52 h-72 rounded-lg hover:scale-105 duration-500 transition ease-in-out font-sora" style={{backgroundImage: `url("${project.image}")`, backgroundSize: 'cover', backgroundPosition: 'center'}}>
-            <div className={`${isDarkMode ? 'bg-[#1E1E1E] text-gray-200' : 'bg-gray-200 text-[#1E1E1E]'} text-gray-200 shadow-lg rounded-lg w-full p-2`}> 
+            <div className={`${isDarkMode ? 'bg-[#1E1E1E] text-gray-200' : 'bg-gray-200 text-[#1E1E1E]'} shadow-lg rounded-lg w-full p-2`}> 
               <h2 className="text-base font-normal">{project.title}</h2>
               <p className="text-xs font-light">{project.description}</p>
             </div>
