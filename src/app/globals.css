@@ -30,4 +30,7 @@ body {
   .text-balance {
     text-wrap: balance;
   }
+  .bg-conic-gradient {
+    background: conic-gradient(from 0deg, #00FFE0, #7000FF, #00FFE0);
+  }
 }
