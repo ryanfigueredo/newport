@@ -101,24 +101,34 @@ const LandingPage: React.FC = () => {
   const sendEmail = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     try {
+      const formData = new FormData(e.currentTarget);
       const response = await fetch('https://api.emailjs.com/api/v1.0/email/send', {
         method: 'POST',
         headers: {
-          'Content-Type': 'application/json'
+          'Content-Type': 'application/json',
         },
         body: JSON.stringify({
-          from_name: (e.target as HTMLFormElement).name,
-          reply_to: (e.target as HTMLFormElement).email,
-          message: (e.target as HTMLFormElement).message
-        })
+          service_id: process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID,
+          template_id: process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID,
+          user_id: process.env.NEXT_PUBLIC_EMAILJS_USER_ID,
+          template_params: {
+            from_name: formData.get('name'),
+            reply_to: formData.get('email'),
+            message: formData.get('message'),
+          },
+        }),
       });
-      if (response.ok) {
+      const data = await response.json();
+      if (data.status === '200') {
         setEmailSent(true);
+        setTimeout(() => {
+          setEmailSent(false);
+        }, 5000); // Oculta o aviso após 5 segundos
       } else {
-        console.error('Falha ao enviar o email');
+        console.error('Failed to send email');
       }
     } catch (error) {
-      console.error('Error ao enviar o email:', error);
+      console.error('Error sending email:', error);
     }
   };
 
