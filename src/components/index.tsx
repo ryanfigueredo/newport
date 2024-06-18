@@ -80,7 +80,7 @@ const projectsTwo = [
   }
 ];
 
-const scrollToSection = (id) => {
+const scrollToSection = (id: string) => {
   const section = document.getElementById(id);
   if (section) {
     section.scrollIntoView({ behavior: 'smooth' });
@@ -88,6 +88,8 @@ const scrollToSection = (id) => {
 };
 
 const LandingPage: React.FC = () => {
+  
+
   const [isDarkMode, setIsDarkMode] = useState(true);
 
   const toggleTheme = () => {
@@ -96,36 +98,27 @@ const LandingPage: React.FC = () => {
 
   const [emailSent, setEmailSent] = useState(false);
 
-  const sendEmail = async (e) => {
+  const sendEmail = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     try {
       const response = await fetch('https://api.emailjs.com/api/v1.0/email/send', {
         method: 'POST',
         headers: {
-          'Content-Type': 'application/json',
+          'Content-Type': 'application/json'
         },
         body: JSON.stringify({
-          service_id: process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID,
-          template_id: process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID,
-          user_id: process.env.NEXT_PUBLIC_EMAILJS_USER_ID,
-          template_params: {
-            from_name: e.target.name.value,
-            reply_to: e.target.email.value,
-            message: e.target.message.value,
-          },
-        }),
+          from_name: (e.target as HTMLFormElement).name,
+          reply_to: (e.target as HTMLFormElement).email,
+          message: (e.target as HTMLFormElement).message
+        })
       });
-      const data = await response.json();
-      if (data.status === '200') {
+      if (response.ok) {
         setEmailSent(true);
-        setTimeout(() => {
-          setEmailSent(false);
-        }, 5000); // Oculta o aviso após 5 segundos
       } else {
-        console.error('Failed to send email');
+        console.error('Falha ao enviar o email');
       }
     } catch (error) {
-      console.error('Error sending email:', error);
+      console.error('Error ao enviar o email:', error);
     }
   };
 
@@ -574,7 +567,7 @@ const LandingPage: React.FC = () => {
                 <textarea
                   id="message"
                   name="message"
-                  rows="4"
+                  rows={4}
                   required
                   className="w-full border-b-2 border-006FEE focus:outline-none bg-transparent focus:border-blue-600 transition duration-200"
                 ></textarea>
@@ -600,8 +593,8 @@ const LandingPage: React.FC = () => {
             </form>
           </div>
           {emailSent && (
-            <div className="fixed top-0 left-0 w-full flex bg-green-500 text-white text-center py-2 px-4 rounded justify-center">
-              <div className="">
+            <div className="fixed top-0 left-0 w-full flex justify-center">
+              <div className="bg-green-500 text-white text-center py-2 px-4 rounded">
                 Email enviado com sucesso!
               </div>
             </div>
