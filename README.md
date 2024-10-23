@@ -26,7 +26,7 @@ Este é o código-fonte do meu portfólio online, onde apresento informações s
 1. Clone este repositório:
 
    ```bash
-   git clone https://github.com/seu-usuario/portfolio.git
+   git clone https://github.com/ryanfigueredo/newport.git
    ```
 
 2. Instale as dependências:
