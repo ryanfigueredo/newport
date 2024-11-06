@@ -3,7 +3,8 @@
 import Image from "next/image"
 import Link from "next/link"
 import { motion } from "framer-motion"
-import React, { useState } from "react"
+import React, { useEffect, useState } from "react"
+import { link } from "fs"
 
 const container = {
   hidden: { opacity: 1, scale: 0 },
@@ -28,21 +29,24 @@ const item = {
 const projects = [
   {
     id: 0,
-    title: "Ecommerce",
-    image: "/images/.png",
-    description: "React, TypeScript, Prisma",
+    title: "Gestão de Estoque",
+    image: "/images/stockly.png",
+    description: "React, Next.js, TypeScript, Prisma",
+    link: "https://github.com/ryanfigueredo/stockly",
   },
   {
     id: 1,
-    title: "Landing Pages",
-    image: "/images/login.png",
-    description: "Wordpress",
+    title: "Irmãos Mury",
+    image: "/images/mury.png",
+    description: "Landing Page",
+    link: "https://irmaosmury.com.br/",
   },
   {
     id: 2,
-    title: "Bot Ticket",
-    image: "/images/login.png",
-    description: "Discord.js",
+    title: "Pedracom Pedreiras",
+    image: "/images/pedracom.png",
+    description: "Landing Page",
+    link: "https://pedracom.com.br/",
   },
   {
     id: 3,
@@ -56,27 +60,29 @@ const projects = [
 const projectsTwo = [
   {
     id: 0,
-    title: "Projeto do Curso",
+    title: "Ecommerce",
     image: "/images/login.png",
-    description: "Java",
+    description: "Next.js, TypeScript, Prisma, Mercado Pago, Postgres",
   },
   {
     id: 1,
-    title: "Calculadora",
+    title: "Ecommerce",
     image: "/images/login.png",
-    description: "Java",
+    description: "Next.js, TypeScript, Prisma, Iugu, Stripe, MySQL",
   },
   {
     id: 2,
-    title: "Suporte com Java",
-    image: "/images/login.png",
-    description: "Back-End Santander",
+    title: "Dashboard Financeiro",
+    image: "/images/finance.png",
+    description: "Em Desenvolvimento",
+    link: "https://github.com/ryanfigueredo/finance-app",
   },
   {
     id: 3,
-    title: "Tela de Login",
-    image: "/images/login.png",
-    description: "Html, Javascript, Vite",
+    title: "Loja Virtual - Informática",
+    image: "/images/store.png",
+    description: "Next.js, TypeScript, Prisma, Mercado Pago, Postgres",
+    link: "https://rkstore-ebon.vercel.app/",
   },
 ]
 
@@ -93,6 +99,11 @@ const LandingPage: React.FC = () => {
   const toggleTheme = () => {
     setIsDarkMode(!isDarkMode)
   }
+
+  useEffect(() => {
+    document.body.classList.toggle("dark", isDarkMode)
+    document.body.classList.toggle("light", !isDarkMode)
+  }, [isDarkMode])
 
   const [emailSent, setEmailSent] = useState(false)
 
@@ -333,26 +344,49 @@ const LandingPage: React.FC = () => {
               className="item w-52 h-72"
               variants={item}
             >
-              <Link
-                href="/"
-                className="flex items-end text-center w-full h-full rounded-lg hover:scale-105 duration-500 transition ease-in-out font-sora"
-                style={{
-                  backgroundImage: `url("${project.image}")`,
-                  backgroundSize: "cover",
-                  backgroundPosition: "center",
-                }}
-              >
-                <div
-                  className={`${
-                    isDarkMode
-                      ? "bg-[#1E1E1E] text-gray-200"
-                      : "bg-gray-200 text-[#1E1E1E]"
-                  } shadow-lg rounded-lg w-full p-2`}
+              {project.link ? (
+                <Link
+                  href={project.link}
+                  target="_blank"
+                  className="flex items-end text-center w-full h-full rounded-lg hover:scale-105 duration-500 transition ease-in-out font-sora"
+                  style={{
+                    backgroundImage: `url("${project.image}")`,
+                    backgroundSize: "cover",
+                    backgroundPosition: "center",
+                  }}
                 >
-                  <h2 className="text-base font-normal">{project.title}</h2>
-                  <p className="text-xs font-light">{project.description}</p>
+                  <div
+                    className={`${
+                      isDarkMode
+                        ? "bg-[#1E1E1E] text-gray-200"
+                        : "bg-gray-200 text-[#1E1E1E]"
+                    } shadow-lg rounded-lg w-full p-2`}
+                  >
+                    <h2 className="text-base font-normal">{project.title}</h2>
+                    <p className="text-xs font-light">{project.description}</p>
+                  </div>
+                </Link>
+              ) : (
+                <div
+                  className="flex items-end text-center w-full h-full rounded-lg hover:scale-105 duration-500 transition ease-in-out font-sora"
+                  style={{
+                    backgroundImage: `url("${project.image}")`,
+                    backgroundSize: "cover",
+                    backgroundPosition: "center",
+                  }}
+                >
+                  <div
+                    className={`${
+                      isDarkMode
+                        ? "bg-[#1E1E1E] "
+                        : "bg-gray-200 text-[#1E1E1E]"
+                    } shadow-lg rounded-lg w-full p-2`}
+                  >
+                    <h2 className="text-base font-normal">{project.title}</h2>
+                    <p className="text-xs font-light">{project.description}</p>
+                  </div>
                 </div>
-              </Link>
+              )}
             </motion.li>
           ))}
         </motion.ul>
