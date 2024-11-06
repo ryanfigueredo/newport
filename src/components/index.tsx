@@ -4,7 +4,7 @@ import Image from "next/image"
 import Link from "next/link"
 import { motion } from "framer-motion"
 import React, { useEffect, useState } from "react"
-import { link } from "fs"
+import ContactForm from "./form"
 
 const container = {
   hidden: { opacity: 1, scale: 0 },
@@ -710,105 +710,7 @@ const LandingPage: React.FC = () => {
         className="w-4/5 h-0.5 bg-[#7C7C7C] border-none m-2 block"
       />
 
-      <motion.div
-        initial={{ opacity: 0, y: 200 }}
-        whileInView={{
-          opacity: 1,
-          y: 0,
-          transition: { delay: 0.2, duration: 0.5 },
-        }}
-        exit={{ opacity: 0, y: -100 }}
-        transition={{ duration: 0.5, ease: "easeInOut" }}
-        viewport={{ once: true }}
-        className=""
-        id="contact"
-      >
-        <div className="md:w-full flex h-full justify-center items-center md:p-36 p-16 space-y-2 md:space-y-8">
-          <Image
-            width={300}
-            height={0}
-            src="/images/contact.png"
-            alt="Contact"
-          />
-          <div className="w-full max-w-lg">
-            <h1 className="text-4xl font-bold mb-8">Entrar em contato</h1>
-            <form onSubmit={sendEmail} className="space-y-6">
-              <div className="mb-6">
-                <label
-                  htmlFor="name"
-                  className="block text-gray-200 text-sm font-regular font-inter mb-2"
-                >
-                  Nome
-                </label>
-                <input
-                  type="text"
-                  id="name"
-                  name="name"
-                  required
-                  className="w-full border-b-2 border-006FEE focus:outline-none bg-transparent focus:border-blue-600 transition duration-200"
-                />
-              </div>
-              <div className="mb-6">
-                <label
-                  htmlFor="email"
-                  className="block text-gray-200 text-sm font-regular mb-2"
-                >
-                  Email
-                </label>
-                <input
-                  type="email"
-                  id="email"
-                  name="email"
-                  required
-                  className="w-full border-b-2 border-006FEE focus:outline-none bg-transparent focus:border-blue-600 transition duration-200"
-                />
-              </div>
-              <div className="mb-6">
-                <label
-                  htmlFor="message"
-                  className="block text-gray-200 text-sm font-regular mb-2"
-                >
-                  Digite sua mensagem
-                </label>
-                <textarea
-                  id="message"
-                  name="message"
-                  rows={4}
-                  required
-                  className="w-full border-b-2 border-006FEE focus:outline-none bg-transparent focus:border-blue-600 transition duration-200"
-                ></textarea>
-              </div>
-              <div className="mb-6 flex items-center">
-                <input
-                  type="checkbox"
-                  id="consent"
-                  name="consent"
-                  required
-                  className="mr-2"
-                />
-                <label htmlFor="consent" className="text-gray-700 text-sm">
-                  Aceito receber contato
-                </label>
-              </div>
-              <div className="flex justify-end">
-                <button
-                  type="submit"
-                  className="bg-blue-600 text-white font-bold py-4 px-6 rounded hover:bg-blue-700 transition duration-200"
-                >
-                  Enviar
-                </button>
-              </div>
-            </form>
-          </div>
-          {emailSent && (
-            <div className="fixed top-0 left-0 w-full flex justify-center">
-              <div className="bg-green-500 text-white text-center py-2 px-4 rounded">
-                Email enviado com sucesso!
-              </div>
-            </div>
-          )}
-        </div>
-      </motion.div>
+      <ContactForm />
     </div>
   )
 }
