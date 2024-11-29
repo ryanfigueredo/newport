@@ -1,10 +1,10 @@
-"use client"
+"use client";
 
-import Image from "next/image"
-import Link from "next/link"
-import { motion } from "framer-motion"
-import React, { useEffect, useState } from "react"
-import ContactForm from "./form"
+import Image from "next/image";
+import Link from "next/link";
+import { motion } from "framer-motion";
+import React, { useEffect, useState } from "react";
+import ContactForm from "./form";
 
 const container = {
   hidden: { opacity: 1, scale: 0 },
@@ -16,7 +16,7 @@ const container = {
       staggerChildren: 0.2,
     },
   },
-}
+};
 
 const item = {
   hidden: { y: 20, opacity: 0 },
@@ -24,15 +24,15 @@ const item = {
     y: 0,
     opacity: 1,
   },
-}
+};
 
 const projects = [
   {
     id: 0,
     title: "Gestão de Estoque",
     image: "/images/stockly.png",
-    description: "React, Next.js, TypeScript, Prisma",
-    link: "https://github.com/ryanfigueredo/stockly",
+    description: "Next.js, TypeScript, Postgress",
+    link: "https://stockly-lovat.vercel.app/",
   },
   {
     id: 1,
@@ -55,18 +55,18 @@ const projects = [
     description: "React.js, Typescript, Next.js (Code + UX/UI)",
     link: "https://klfacilities.com/",
   },
-]
+];
 
 const projectsTwo = [
   {
     id: 0,
-    title: "Ecommerce",
+    title: "T - Ecommerce",
     image: "/images/login.png",
     description: "Next.js, TypeScript, Prisma, Mercado Pago, Postgres",
   },
   {
     id: 1,
-    title: "Ecommerce",
+    title: "R - Ecommerce",
     image: "/images/login.png",
     description: "Next.js, TypeScript, Prisma, Iugu, Stripe, MySQL",
   },
@@ -84,33 +84,33 @@ const projectsTwo = [
     description: "Next.js, TypeScript, Prisma, Mercado Pago, Postgres",
     link: "https://rkstore-ebon.vercel.app/",
   },
-]
+];
 
 const scrollToSection = (id: string) => {
-  const section = document.getElementById(id)
+  const section = document.getElementById(id);
   if (section) {
-    section.scrollIntoView({ behavior: "smooth" })
+    section.scrollIntoView({ behavior: "smooth" });
   }
-}
+};
 
 const LandingPage: React.FC = () => {
-  const [isDarkMode, setIsDarkMode] = useState(true)
+  const [isDarkMode, setIsDarkMode] = useState(true);
 
   const toggleTheme = () => {
-    setIsDarkMode(!isDarkMode)
-  }
+    setIsDarkMode(!isDarkMode);
+  };
 
   useEffect(() => {
-    document.body.classList.toggle("dark", isDarkMode)
-    document.body.classList.toggle("light", !isDarkMode)
-  }, [isDarkMode])
+    document.body.classList.toggle("dark", isDarkMode);
+    document.body.classList.toggle("light", !isDarkMode);
+  }, [isDarkMode]);
 
-  const [emailSent, setEmailSent] = useState(false)
+  const [emailSent, setEmailSent] = useState(false);
 
   const sendEmail = async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault()
+    e.preventDefault();
     try {
-      const formData = new FormData(e.currentTarget)
+      const formData = new FormData(e.currentTarget);
       const response = await fetch(
         "https://api.emailjs.com/api/v1.0/email/send",
         {
@@ -129,20 +129,20 @@ const LandingPage: React.FC = () => {
             },
           }),
         }
-      )
-      const data = await response.json()
+      );
+      const data = await response.json();
       if (data.status === "200") {
-        setEmailSent(true)
+        setEmailSent(true);
         setTimeout(() => {
-          setEmailSent(false)
-        }, 5000) // Oculta o aviso após 5 segundos
+          setEmailSent(false);
+        }, 5000); // Oculta o aviso após 5 segundos
       } else {
-        console.error("Failed to send email")
+        console.error("Failed to send email");
       }
     } catch (error) {
-      console.error("Error sending email:", error)
+      console.error("Error sending email:", error);
     }
-  }
+  };
 
   return (
     <div
@@ -171,8 +171,8 @@ const LandingPage: React.FC = () => {
             <Link
               href="#project"
               onClick={(e) => {
-                e.preventDefault()
-                scrollToSection("project")
+                e.preventDefault();
+                scrollToSection("project");
               }}
             >
               Projetos
@@ -180,8 +180,8 @@ const LandingPage: React.FC = () => {
             <Link
               href="#about"
               onClick={(e) => {
-                e.preventDefault()
-                scrollToSection("about")
+                e.preventDefault();
+                scrollToSection("about");
               }}
             >
               Sobre
@@ -189,8 +189,8 @@ const LandingPage: React.FC = () => {
             <Link
               href="#contact"
               onClick={(e) => {
-                e.preventDefault()
-                scrollToSection("contact")
+                e.preventDefault();
+                scrollToSection("contact");
               }}
             >
               Contato
@@ -712,7 +712,7 @@ const LandingPage: React.FC = () => {
 
       <ContactForm />
     </div>
-  )
-}
+  );
+};
 
-export default LandingPage
+export default LandingPage;
